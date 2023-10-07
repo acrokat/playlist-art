@@ -1,24 +1,40 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const URLInput = (props) => {
   const [url, setUrl] = useState(''); // Initial state for the URL text field
 
-// url handler: add call to spotify api here
+// url handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Entered URL:", url);
+    
+     // Extract the playlist id from given url
+     const match = url.match(/\/playlist\/([\w-]+)/);
+     if (match && match[1]) {
+       const playlistId = match[1];
+ 
+       try {
+         const response = axios.get(`/api/spotify/playlist/${playlistId}`);
+         console.log(response.data); 
+       } catch (err) {
+         console.error("Error fetching playlist data:", err);
+       }
+     } else {
+       console.error("Invalid URL: Plase ensure you have a specific Playlist URL");
+     }
+
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Enter URL:
+          Enter playlist URL:
           <input 
             type="url" 
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://example.com"
+            placeholder="https://open.spotify.com/playlist/..."
             required
           />
         </label>
