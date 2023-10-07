@@ -1,5 +1,0 @@
-"scripts": {
-  "start": "webpack serve --mode development --open --hot",
-  "build": "webpack --mode production",
-  "server": "node server/index.js"
-}

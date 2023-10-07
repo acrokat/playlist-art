@@ -4,7 +4,9 @@
   "description": "Website for analyzing spotify playlists and providing custom playlist artwork",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --mode development --open --hot",
+    "build": "webpack --mode production",
+    "server": "node server/index.js"
   },
   "keywords": [],
   "author": "",
